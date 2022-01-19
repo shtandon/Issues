@@ -1,0 +1,34 @@
+numerical = [var for var in df2.columns if df2[var].dtype!='O']
+print('There are {} numerical variables'.format(len(numerical)))
+null_num=[]
+for i in numerical:
+    
+    if(df2[i].isnull().sum()>0):
+        print(i," ", df2[i].isnull().sum())
+        
+        null_num.append(i)
+print(null_num)  
+
+for i in null_num:
+    df2.loc[df2[i]=='',[i] ]= np.NaN
+    df2[i].fillna(value =df2[i].median(),  inplace = True)
+    df2[i].value_counts(dropna=False)
+
+
+
+
+categorical = [var for var in df2.columns if df2[var].dtype=='O']
+print('There are {} categorical variables'.format(len(categorical)))
+null_cat=[]
+for i in categorical:
+    
+    if(df2[i].isnull().sum()>0):
+        print(i," ", df2[i].isnull().sum())
+        
+        null_cat.append(i)
+print(null_cat)  
+
+df2['OWN.HOUSE.TYPE'].value_counts(dropna=False)
+df2.loc[df2['OWN.HOUSE.TYPE']=='',['OWN.HOUSE.TYPE'] ]= np.NaN
+df2['OWN.HOUSE.TYPE'].fillna('Missing',  inplace = True)
+df2['OWN.HOUSE.TYPE'].value_counts(dropna=False)  
