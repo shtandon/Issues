@@ -1,0 +1,16 @@
+kfold = StratifiedKFold(n_splits=3,shuffle=True,random_state=11)
+
+splits = kfold.split(data,data['Survived'])
+print("PROPORTION OF TARGET IN THE ORIGINAL DATA:")
+print(data["Survived"].value_counts() / len(data))
+
+for n,(train_index,test_index) in enumerate(splits):
+    print("")
+    print(n+1," TRAINING SET SIZe: ",np.round(len(train_index) / (len(train_index)+len(test_index)),2))
+    print(n+1," TEST SET SIZE: ",np.round(len(test_index) / (len(train_index)+len(test_index)),2))
+    print("PROPORTION OF TARGET IN THE TRAINING SET:")
+    print(data.iloc[test_index,3].value_counts() / len(data.iloc[test_index,3]))
+    
+    print("PROPORTION OF TARGET IN THE TEST SET:")
+    print(data.iloc[train_index,3].value_counts() / len(data.iloc[train_index,3]))
+   
