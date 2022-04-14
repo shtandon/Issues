@@ -32,3 +32,4 @@ df2['OWN.HOUSE.TYPE'].value_counts(dropna=False)
 df2.loc[df2['OWN.HOUSE.TYPE']=='',['OWN.HOUSE.TYPE'] ]= np.NaN
 df2['OWN.HOUSE.TYPE'].fillna('Missing',  inplace = True)
 df2['OWN.HOUSE.TYPE'].value_counts(dropna=False)  
+#shruti
